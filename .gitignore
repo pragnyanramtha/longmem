@@ -5,3 +5,4 @@ __pycache__/
 snapshots/
 .venv/
 eval.log
+*.bak
