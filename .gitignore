@@ -1,0 +1,7 @@
+.env
+memory.db
+eval_memory.db
+__pycache__/
+snapshots/
+.venv/
+eval.log
