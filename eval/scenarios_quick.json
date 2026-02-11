@@ -1,0 +1,70 @@
+{
+    "plants": [
+        {
+            "turn": 1,
+            "role": "user",
+            "content": "My name is Arjun and I speak Kannada."
+        },
+        {
+            "turn": 2,
+            "role": "user",
+            "content": "I'm allergic to peanuts and shellfish."
+        },
+        {
+            "turn": 5,
+            "role": "user",
+            "content": "Never schedule anything before 11 AM, I work night shifts."
+        }
+    ],
+    "probes": [
+        {
+            "turn": 10,
+            "content": "Can you greet me?",
+            "expected_keys": [
+                "name"
+            ],
+            "expected_keywords": [
+                "arjun"
+            ],
+            "description": "Should use the name Arjun"
+        },
+        {
+            "turn": 20,
+            "content": "Suggest a snack recipe for me.",
+            "expected_keys": [
+                "allergy"
+            ],
+            "expected_keywords": [
+                "peanut",
+                "shellfish",
+                "allergic"
+            ],
+            "description": "Should avoid peanuts and shellfish"
+        },
+        {
+            "turn": 30,
+            "content": "Book a meeting for me tomorrow morning.",
+            "expected_keys": [
+                "schedule_constraint"
+            ],
+            "expected_keywords": [
+                "11 am",
+                "11am",
+                "after 11",
+                "morning"
+            ],
+            "description": "Should schedule after 11 AM"
+        },
+        {
+            "turn": 40,
+            "content": "What language do I speak?",
+            "expected_keys": [
+                "preferred_language"
+            ],
+            "expected_keywords": [
+                "kannada"
+            ],
+            "description": "Should know Kannada"
+        }
+    ]
+}
