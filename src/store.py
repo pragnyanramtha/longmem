@@ -277,5 +277,5 @@ class MemoryStore:
             created_at=row["created_at"],
             updated_at=row["updated_at"],
             is_active=bool(row["is_active"]),
-            last_used_turn=row.get("last_used_turn", 0),
+            last_used_turn=row["last_used_turn"] if "last_used_turn" in row.keys() else 0,
         )
