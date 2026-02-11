@@ -1,8 +1,62 @@
+# Environment and secrets
 .env
+.env.local
+
+# Database files
 memory.db
 eval_memory.db
+demo_memory.db
+notebook_demo.db
+test_*.db
+
+# Python
 __pycache__/
-snapshots/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
 .venv/
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# Logs and snapshots
+snapshots/
 eval.log
+*.log
+
+# Backup files
 *.bak
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
