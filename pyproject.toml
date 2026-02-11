@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "groq>=1.0.0",
+    "numpy>=2.4.2",
     "openai>=2.18.0",
     "python-dotenv>=1.2.1",
     "rich>=14.3.2",
