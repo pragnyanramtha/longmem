@@ -45,6 +45,7 @@ class Memory:
     created_at: float       # unix timestamp
     updated_at: float       # unix timestamp
     is_active: bool = True
+    last_used_turn: int = 0  # track when memory was last retrieved
 
     @staticmethod
     def generate_id() -> str:

@@ -103,6 +103,10 @@ class LongMemAgent:
         results = self.retriever.retrieve(user_message, top_k=5)
         retrieved_memories = [r.memory for r in results]
         retrieval_ms = (time.time() - retrieval_start) * 1000
+        
+        # Update last_used_turn for retrieved memories
+        for memory in retrieved_memories:
+            self.store.touch_memory(memory.id, self.turn_id)
 
         # ── STEP 3: Rebuild system prompt with retrieved memories ──
         self._rebuild_system_prompt(query_memories=retrieved_memories)
@@ -145,6 +149,7 @@ class LongMemAgent:
                     "memory_id": m.id,
                     "content": f"{m.key}: {m.value}",
                     "origin_turn": m.source_turn,
+                    "last_used_turn": self.turn_id,
                     "type": m.type,
                     "confidence": m.confidence,
                 }

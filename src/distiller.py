@@ -68,8 +68,8 @@ class MemoryDistiller:
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.1,
-            max_tokens=1000,
-            response_format={"type": "json_object"},
+            max_tokens=2000,  # Increased for larger memory sets
+            response_format={"type": "json_object"} if hasattr(self.client, '_client') else {},
         )
         
         raw = response.choices[0].message.content
@@ -85,9 +85,25 @@ class MemoryDistiller:
         
         try:
             data = json.loads(cleaned)
-        except json.JSONDecodeError:
-            print(f"[distiller] Failed to parse JSON: {cleaned[:200]}...")
-            return []
+        except json.JSONDecodeError as e:
+            # Try to fix common truncation issues
+            if cleaned.endswith("..."):
+                # Model truncated the response - try to close the JSON
+                attempt = cleaned.rstrip('.') 
+                # Try adding closing brackets
+                for suffix in ['}]}', ']}', '}]', ']', '}']:
+                    try:
+                        data = json.loads(attempt + suffix)
+                        print(f"[distiller] Warning: JSON was truncated, recovered with suffix '{suffix}'")
+                        break
+                    except json.JSONDecodeError:
+                        continue
+                else:
+                    print(f"[distiller] Failed to parse JSON (truncated): {cleaned[:200]}...")
+                    return []
+            else:
+                print(f"[distiller] Failed to parse JSON: {cleaned[:200]}...")
+                return []
 
         memories = data.get("memories", [])
         results = []

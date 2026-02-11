@@ -60,7 +60,8 @@ class MemoryStore:
                 confidence  REAL DEFAULT 0.9,
                 created_at  REAL NOT NULL,
                 updated_at  REAL NOT NULL,
-                is_active   INTEGER DEFAULT 1
+                is_active   INTEGER DEFAULT 1,
+                last_used_turn INTEGER DEFAULT 0
             );
 
             CREATE TABLE IF NOT EXISTS profile (
@@ -146,6 +147,14 @@ class MemoryStore:
         self.db.execute(
             "UPDATE memories SET is_active = 0, updated_at = ? WHERE key = ? AND is_active = 1",
             (time.time(), key)
+        )
+        self.db.commit()
+
+    def touch_memory(self, mem_id: str, turn_id: int):
+        """Update last_used_turn for a memory when it's retrieved."""
+        self.db.execute(
+            "UPDATE memories SET last_used_turn = ? WHERE id = ?",
+            (turn_id, mem_id)
         )
         self.db.commit()
 
@@ -268,4 +277,5 @@ class MemoryStore:
             created_at=row["created_at"],
             updated_at=row["updated_at"],
             is_active=bool(row["is_active"]),
+            last_used_turn=row.get("last_used_turn", 0),
         )
