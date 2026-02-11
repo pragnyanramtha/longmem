@@ -1,0 +1,22 @@
+# Core dependencies for Atlas - Long-Form Memory System
+# Python >= 3.11 required
+
+# LLM Clients
+groq>=1.0.0
+openai>=2.18.0
+
+# Memory & NLP
+sentence-transformers>=5.2.2
+sqlite-vec>=0.1.6
+tiktoken>=0.12.0
+
+# Utilities
+python-dotenv>=1.2.1
+rich>=14.3.2
+
+# Data processing
+numpy>=2.4.2
+
+# Optional: For Jupyter notebook demo
+jupyter>=1.0.0
+ipykernel>=6.29.0

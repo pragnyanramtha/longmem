@@ -1,0 +1,18 @@
+name: atlas
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.11
+  - pip
+  - pip:
+      - groq>=1.0.0
+      - openai>=2.18.0
+      - sentence-transformers>=5.2.2
+      - sqlite-vec>=0.1.6
+      - tiktoken>=0.12.0
+      - python-dotenv>=1.2.1
+      - rich>=14.3.2
+      - numpy>=2.4.2
+      - jupyter>=1.0.0
+      - ipykernel>=6.29.0
