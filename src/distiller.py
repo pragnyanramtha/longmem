@@ -68,7 +68,7 @@ class MemoryDistiller:
             model=self.model,
             messages=[{"role": "user", "content": prompt}],
             temperature=0.1,
-            max_tokens=2000,  # Increased for larger memory sets
+            max_tokens=4000,  # Large enough for even big memory sets
             response_format={"type": "json_object"} if hasattr(self.client, '_client') else {},
         )
         
@@ -83,27 +83,15 @@ class MemoryDistiller:
         cleaned = re.sub(r"^```(?:json)?\s*", "", cleaned)
         cleaned = re.sub(r"\s*```$", "", cleaned)
         
+        data = None
         try:
             data = json.loads(cleaned)
-        except json.JSONDecodeError as e:
-            # Try to fix common truncation issues
-            if cleaned.endswith("..."):
-                # Model truncated the response - try to close the JSON
-                attempt = cleaned.rstrip('.') 
-                # Try adding closing brackets
-                for suffix in ['}]}', ']}', '}]', ']', '}']:
-                    try:
-                        data = json.loads(attempt + suffix)
-                        print(f"[distiller] Warning: JSON was truncated, recovered with suffix '{suffix}'")
-                        break
-                    except json.JSONDecodeError:
-                        continue
-                else:
-                    print(f"[distiller] Failed to parse JSON (truncated): {cleaned[:200]}...")
-                    return []
-            else:
-                print(f"[distiller] Failed to parse JSON: {cleaned[:200]}...")
-                return []
+        except json.JSONDecodeError:
+            # Try to recover from truncated JSON
+            data = self._recover_truncated_json(cleaned)
+        
+        if data is None:
+            return []
 
         memories = data.get("memories", [])
         results = []
@@ -121,7 +109,6 @@ class MemoryDistiller:
                     key=item.get("key", "unknown"),
                     value=str(val),
                     confidence=float(item.get("confidence", 0.8)),
-                    reasoning=item.get("reasoning", ""),
                 )
                 # Validate
                 if dm.key and dm.value and dm.action in ("add", "update", "keep", "expire"):
@@ -131,3 +118,56 @@ class MemoryDistiller:
                 continue
 
         return results
+
+    def _recover_truncated_json(self, text: str) -> dict | None:
+        """Attempt to recover valid JSON from a truncated LLM response."""
+        # Strategy 1: Try closing open brackets/braces
+        # Strip trailing incomplete tokens (partial strings, trailing commas, etc.)
+        attempt = text.rstrip()
+        # Remove trailing partial content after last complete value
+        # e.g., remove trailing comma, partial key, etc.
+        attempt = re.sub(r',\s*"[^"]*$', '', attempt)  # trailing partial key
+        attempt = re.sub(r',\s*$', '', attempt)  # trailing comma
+        attempt = re.sub(r'\.{2,}$', '', attempt)  # trailing dots
+        
+        # Count unclosed brackets
+        open_braces = attempt.count('{') - attempt.count('}')
+        open_brackets = attempt.count('[') - attempt.count(']')
+        
+        # Try closing with the right number of brackets
+        suffix = ']' * max(0, open_brackets) + '}' * max(0, open_braces)
+        
+        # Try multiple closing strategies
+        strategies = [
+            attempt + suffix,
+            attempt + '}' + suffix,
+            attempt + '"' + suffix,
+            attempt + '"}' + suffix,
+            attempt + '"}'  + ']' * max(0, open_brackets) + '}' * max(0, open_braces - 1),
+        ]
+        
+        for s in strategies:
+            try:
+                data = json.loads(s)
+                print(f"[distiller] Warning: recovered truncated JSON via bracket-closing")
+                return data
+            except json.JSONDecodeError:
+                continue
+        
+        # Strategy 2: Extract individual memory objects via regex
+        pattern = r'\{[^{}]*"action"\s*:\s*"[^"]+"[^{}]*"key"\s*:\s*"[^"]+"[^{}]*"value"\s*:\s*"[^"]+"[^{}]*\}'
+        matches = re.findall(pattern, text)
+        if matches:
+            recovered_memories = []
+            for m in matches:
+                try:
+                    obj = json.loads(m)
+                    recovered_memories.append(obj)
+                except json.JSONDecodeError:
+                    continue
+            if recovered_memories:
+                print(f"[distiller] Warning: recovered {len(recovered_memories)} memories via regex extraction")
+                return {"memories": recovered_memories}
+        
+        print(f"[distiller] Failed to parse JSON: {text[:200]}...")
+        return None

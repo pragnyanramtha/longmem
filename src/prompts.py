@@ -40,8 +40,7 @@ Return ONLY valid JSON with no markdown formatting, no code fences:
       "category": "language|schedule|personal|work|health|location|dietary|financial|family|tech|communication|travel",
       "key": "canonical_snake_case_key",
       "value": "the actual information",
-      "confidence": 0.95,
-      "reasoning": "one sentence why"
+      "confidence": 0.95
     }}
   ]
 }}\\

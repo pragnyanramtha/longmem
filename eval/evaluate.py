@@ -36,8 +36,8 @@ def evaluate():
     console = Console()
 
     parser = argparse.ArgumentParser(description="Evaluate memory agent")
-    parser.add_argument("--conversation", default=os.path.join(os.path.dirname(__file__), "conversation_1000.json"), help="Path to conversation JSON")
-    parser.add_argument("--scenarios", default=os.path.join(os.path.dirname(__file__), "scenarios.json"), help="Path to scenarios JSON")
+    parser.add_argument("--conversation", default=None, help="Path to conversation JSON (auto-detected based on --quick)")
+    parser.add_argument("--scenarios", default=None, help="Path to scenarios JSON (auto-detected based on --quick)")
     parser.add_argument("--provider", default="groq", choices=["groq", "openai", "ollama"], help="LLM provider")
     parser.add_argument("--local", action="store_true", help="Run with local Ollama server (shorthand for --provider ollama)")
     parser.add_argument("--base-url", help="Base URL for the LLM API")
@@ -45,9 +45,23 @@ def evaluate():
     parser.add_argument("--db", default="eval_memory.db", help="Path to database file")
     parser.add_argument("--limit", type=int, default=2048, help="Context limit")
     parser.add_argument("--flush", type=float, default=0.70, help="Flush threshold")
-    parser.add_argument("--turns", type=int, default=50, help="Number of turns to evaluate")
+    parser.add_argument("--turns", type=int, default=None, help="Number of turns to evaluate (defaults to full conversation length)")
+    parser.add_argument("--quick", action="store_true", help="Use quick scenario/conversation for faster evaluation")
     parser.add_argument("--export", help="Export detailed results to JSON file")
     args = parser.parse_args()
+    
+    # Auto-detect conversation/scenarios based on --quick flag
+    eval_dir = os.path.dirname(__file__)
+    if args.quick:
+        if not args.conversation:
+            args.conversation = os.path.join(eval_dir, "conversation_quick.json")
+        if not args.scenarios:
+            args.scenarios = os.path.join(eval_dir, "scenarios_quick.json")
+    else:
+        if not args.conversation:
+            args.conversation = os.path.join(eval_dir, "conversation_1000.json")
+        if not args.scenarios:
+            args.scenarios = os.path.join(eval_dir, "scenarios.json")
     
     # Load conversation
     if not os.path.exists(args.conversation):
@@ -62,6 +76,16 @@ def evaluate():
         scenarios = json.load(f)
     
     probes = {p["turn"]: p for p in scenarios["probes"]}
+    
+    # Default turns to full conversation length (so all probes are reached)
+    if args.turns is None:
+        args.turns = len(conversation)
+    
+    # Warn if no probes will be reached
+    max_probe_turn = max(probes.keys()) if probes else 0
+    if args.turns < max_probe_turn:
+        console.print(f"[yellow]⚠ Warning: --turns={args.turns} but probes go up to turn {max_probe_turn}. "
+                      f"Some probes won't be evaluated. Use --turns={max_probe_turn} or higher.[/yellow]\n")
     
     # Handle local shorthand
     if args.local:

@@ -61,7 +61,6 @@ class DistilledMemory:
     key: str
     value: str
     confidence: float
-    reasoning: str = ""
 
 
 @dataclass 
