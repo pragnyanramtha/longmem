@@ -1,71 +1,239 @@
 {
   "plants": [
-    {"turn": 1,  "role": "user", "content": "My name is Arjun and I speak Kannada."},
-    {"turn": 2,  "role": "user", "content": "I'm allergic to peanuts and shellfish."},
-    {"turn": 5,  "role": "user", "content": "Never schedule anything before 11 AM, I work night shifts."},
-    {"turn": 12, "role": "user", "content": "My daughter's name is Meera, she's 7 years old."},
-    {"turn": 30, "role": "user", "content": "I use Linux Mint on my laptop and prefer open source software."},
-    {"turn": 45, "role": "user", "content": "My vacation budget is 50000 rupees."},
-    {"turn": 60, "role": "user", "content": "I'm vegetarian. No eggs either."},
-    {"turn": 80, "role": "user", "content": "My email is arjun.dev@gmail.com, always confirm before sending anything."},
-    {"turn": 100,"role": "user", "content": "I have a meeting with Priya every Tuesday at 3 PM."},
-    {"turn": 120,"role": "user", "content": "Actually I moved my schedule up. I can take calls after 10 AM now instead of 11."}
+    {
+      "turn": 1,
+      "role": "user",
+      "content": "My name is Arjun and I speak Kannada."
+    },
+    {
+      "turn": 2,
+      "role": "user",
+      "content": "I'm allergic to peanuts and shellfish."
+    },
+    {
+      "turn": 5,
+      "role": "user",
+      "content": "Never schedule anything before 11 AM, I work night shifts."
+    },
+    {
+      "turn": 12,
+      "role": "user",
+      "content": "My daughter's name is Meera, she's 7 years old."
+    },
+    {
+      "turn": 30,
+      "role": "user",
+      "content": "I use Linux Mint on my laptop and prefer open source software."
+    },
+    {
+      "turn": 45,
+      "role": "user",
+      "content": "My vacation budget is 50000 rupees."
+    },
+    {
+      "turn": 60,
+      "role": "user",
+      "content": "I'm vegetarian. No eggs either."
+    },
+    {
+      "turn": 80,
+      "role": "user",
+      "content": "My email is arjun.dev@gmail.com, always confirm before sending anything."
+    },
+    {
+      "turn": 100,
+      "role": "user",
+      "content": "I have a meeting with Priya every Tuesday at 3 PM."
+    },
+    {
+      "turn": 120,
+      "role": "user",
+      "content": "Actually I moved my schedule up. I can take calls after 10 AM now instead of 11."
+    }
   ],
   "probes": [
     {
+      "turn": 8,
+      "content": "Hey, what's my name again?",
+      "expected_keys": [
+        "name"
+      ],
+      "expected_keywords": [
+        "arjun"
+      ],
+      "description": "[early] Should recall name Arjun (planted turn 1)"
+    },
+    {
+      "turn": 15,
+      "content": "I'm thinking of grabbing a snack. Any suggestions?",
+      "expected_keys": [
+        "allergy"
+      ],
+      "expected_keywords": [
+        "peanut",
+        "shellfish",
+        "allergic",
+        "allergy"
+      ],
+      "description": "[early] Should avoid peanuts/shellfish (planted turn 2)"
+    },
+    {
+      "turn": 25,
+      "content": "Can we set up a call at 9 AM tomorrow?",
+      "expected_keys": [
+        "schedule_constraint"
+      ],
+      "expected_keywords": [
+        "11",
+        "night shift",
+        "not before",
+        "after 11",
+        "morning"
+      ],
+      "description": "[early] Should flag 9 AM is before 11 AM constraint (planted turn 5)"
+    },
+    {
+      "turn": 35,
+      "content": "Recommend a laptop OS for me.",
+      "expected_keys": [
+        "os_preference"
+      ],
+      "expected_keywords": [
+        "linux",
+        "mint",
+        "open source"
+      ],
+      "description": "[early] Should suggest Linux Mint / open source (planted turn 30)"
+    },
+    {
+      "turn": 48,
+      "content": "Help me plan a short weekend trip.",
+      "expected_keys": [
+        "vacation_budget"
+      ],
+      "expected_keywords": [
+        "50000",
+        "50,000",
+        "budget",
+        "rupee"
+      ],
+      "description": "[early] Should know budget is 50000 rupees (planted turn 45)"
+    },
+    {
       "turn": 200,
       "content": "Can you greet me?",
-      "expected_keys": ["name"],
-      "expected_keywords": ["arjun"],
+      "expected_keys": [
+        "name"
+      ],
+      "expected_keywords": [
+        "arjun"
+      ],
       "description": "Should use the name Arjun"
     },
     {
       "turn": 350,
       "content": "Suggest a snack recipe for me.",
-      "expected_keys": ["allergy", "dietary_preference"],
-      "expected_keywords": ["peanut", "shellfish", "allergic", "vegetarian", "no egg", "no meat"],
+      "expected_keys": [
+        "allergy",
+        "dietary_preference"
+      ],
+      "expected_keywords": [
+        "peanut",
+        "shellfish",
+        "allergic",
+        "vegetarian",
+        "no egg",
+        "no meat"
+      ],
       "description": "Should avoid peanuts, shellfish, eggs, meat"
     },
     {
       "turn": 500,
       "content": "Book a meeting for me tomorrow morning.",
-      "expected_keys": ["schedule_constraint"],
-      "expected_keywords": ["10 am", "10am", "after 10", "morning"],
+      "expected_keys": [
+        "schedule_constraint"
+      ],
+      "expected_keywords": [
+        "10 am",
+        "10am",
+        "after 10",
+        "morning"
+      ],
       "description": "Should schedule after 10 AM (updated from 11)"
     },
     {
       "turn": 600,
       "content": "What's a good birthday gift for my kid?",
-      "expected_keys": ["daughter_name", "daughter_age"],
-      "expected_keywords": ["meera", "7", "seven"],
+      "expected_keys": [
+        "daughter_name",
+        "daughter_age"
+      ],
+      "expected_keywords": [
+        "meera",
+        "7",
+        "seven"
+      ],
       "description": "Should know Meera, age 7"
     },
     {
       "turn": 750,
       "content": "Help me set up a new laptop.",
-      "expected_keys": ["os_preference"],
-      "expected_keywords": ["linux", "mint", "open source"],
+      "expected_keys": [
+        "os_preference"
+      ],
+      "expected_keywords": [
+        "linux",
+        "mint",
+        "open source"
+      ],
       "description": "Should suggest Linux Mint / open source"
     },
     {
       "turn": 850,
       "content": "What do I have on Tuesday?",
-      "expected_keys": ["recurring_meeting"],
-      "expected_keywords": ["priya", "tuesday", "3 pm"],
+      "expected_keys": [
+        "recurring_meeting"
+      ],
+      "expected_keywords": [
+        "priya",
+        "tuesday",
+        "3 pm"
+      ],
       "description": "Should know about Priya meeting at 3 PM"
     },
     {
       "turn": 937,
       "content": "Can you call me tomorrow?",
-      "expected_keys": ["preferred_language", "schedule_constraint", "name"],
-      "expected_keywords": ["kannada", "10 am", "10am", "after 10", "morning", "arjun"],
+      "expected_keys": [
+        "preferred_language",
+        "schedule_constraint",
+        "name"
+      ],
+      "expected_keywords": [
+        "kannada",
+        "10 am",
+        "10am",
+        "after 10",
+        "morning",
+        "arjun"
+      ],
       "description": "Should know Kannada, after 10 AM, name Arjun"
     },
     {
       "turn": 1000,
       "content": "Plan my vacation.",
-      "expected_keys": ["vacation_budget", "dietary_preference"],
-      "expected_keywords": ["50000", "50,000", "₹50", "vegetarian", "no egg", "no meat"],
+      "expected_keys": [
+        "vacation_budget",
+        "dietary_preference"
+      ],
+      "expected_keywords": [
+        "50000",
+        "50,000",
+        "₹50",
+        "vegetarian",
+        "no egg",
+        "no meat"
+      ],
       "description": "Should know budget 50000 rupees, vegetarian"
     }
   ]

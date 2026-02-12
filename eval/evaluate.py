@@ -38,7 +38,7 @@ def evaluate():
     parser = argparse.ArgumentParser(description="Evaluate memory agent")
     parser.add_argument("--conversation", default=None, help="Path to conversation JSON (auto-detected based on --quick)")
     parser.add_argument("--scenarios", default=None, help="Path to scenarios JSON (auto-detected based on --quick)")
-    parser.add_argument("--provider", default="groq", choices=["groq", "openai", "ollama"], help="LLM provider")
+    parser.add_argument("--provider", default="groq", choices=["groq", "openai", "ollama", "gemini"], help="LLM provider")
     parser.add_argument("--local", action="store_true", help="Run with local Ollama server (shorthand for --provider ollama)")
     parser.add_argument("--base-url", help="Base URL for the LLM API")
     parser.add_argument("--model", default="llama-3.1-8b-instant", help="Model name")
@@ -94,6 +94,10 @@ def evaluate():
             args.base_url = "http://localhost:11434/v1"
         if args.model == "llama-3.1-8b-instant":
              args.model = "llama3" # Default to common local model name if not specified
+    
+    # Handle gemini defaults
+    if args.provider == "gemini" and args.model == "llama-3.1-8b-instant":
+        args.model = "gemma-3-27b-it"  # Default Gemini free-tier model
     
     # Initialize agent with fresh DB
     if os.path.exists(args.db):
@@ -220,9 +224,13 @@ def evaluate():
                 }
                 metrics["probe_results"].append(probe_result)
             
-            # Rate limit for Groq free tier
+            # Rate limit for free tiers
+            # Groq: ~30 req/min
+            # Gemini: 30 req/min (but each turn can trigger 2 API calls: chat + distill)
             if args.provider == "groq" and elapsed < 2000:
                 time.sleep((2000 - elapsed) / 1000.0)
+            elif args.provider == "gemini" and elapsed < 4000:
+                time.sleep((4000 - elapsed) / 1000.0)  # ~15 turns/min to stay safe
     
     # Final snapshot
     agent.store.write_snapshot(args.turns)
