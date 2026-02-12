@@ -63,14 +63,20 @@ class MemoryDistiller:
             end_turn=end_turn,
         )
 
-        # No try/except here - let it fail so the agent can retry or handle it
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[{"role": "user", "content": prompt}],
-            temperature=0.1,
-            max_tokens=4000,  # Large enough for even big memory sets
-            response_format={"type": "json_object"} if hasattr(self.client, '_client') else {},
-        )
+        # Build kwargs — skip response_format for providers that don't support it
+        kwargs = {
+            "model": self.model,
+            "messages": [{"role": "user", "content": prompt}],
+            "temperature": 0.1,
+            "max_tokens": 4000,
+        }
+        
+        # Only add response_format for Groq (has native JSON mode)
+        # Gemini and Ollama don't reliably support it via OpenAI compat
+        if hasattr(self.client, '_client'):  # Groq client
+            kwargs["response_format"] = {"type": "json_object"}
+        
+        response = self.client.chat.completions.create(**kwargs)
         
         raw = response.choices[0].message.content
         parsed = self._parse_response(raw)

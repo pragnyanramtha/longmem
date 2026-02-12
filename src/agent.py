@@ -49,6 +49,13 @@ class LongMemAgent:
                 if not api_key:
                     api_key = "ollama"
             
+            # Normalize defaults for Gemini (OpenAI-compatible endpoint)
+            if provider == "gemini" and not base_url:
+                base_url = "https://generativelanguage.googleapis.com/v1beta/openai/"
+                if not api_key:
+                    import os
+                    api_key = os.environ.get("GEMINI_API_KEY", "")
+            
             # If using a custom base_url (like local server) without a key, use a dummy key
             if base_url and not api_key:
                 api_key = "dummy"
@@ -117,7 +124,7 @@ class LongMemAgent:
         # ── STEP 5: LLM inference ──
         response = self.client.chat.completions.create(
             model=self.model,
-            messages=self.ctx.get_messages_for_api(),
+            messages=self.ctx.get_messages_for_api(provider=self.provider),
             temperature=0.7,
             max_tokens=1024,
         )

@@ -67,15 +67,36 @@ class ContextManager:
         self.messages.append({"role": role, "content": content})
         self._message_tokens += self.count_tokens(content) + 4  # role overhead
 
-    def get_messages_for_api(self) -> list[dict[str, str]]:
+    def get_messages_for_api(self, provider: str = "") -> list[dict[str, str]]:
         """
         Return the full message list for the LLM API call.
         Format: [system, ...messages]
+        
+        For Gemini: merges system prompt into first user message since
+        the OpenAI-compatible endpoint doesn't support the 'system' role.
         """
         result = []
-        if self.system_prompt:
-            result.append({"role": "system", "content": self.system_prompt})
-        result.extend(self.messages)
+        
+        if provider == "gemini":
+            # Gemini doesn't support system role — merge into first user message
+            merged = False
+            for msg in self.messages:
+                if not merged and msg["role"] == "user" and self.system_prompt:
+                    result.append({
+                        "role": "user",
+                        "content": f"[System Instructions]\n{self.system_prompt}\n\n[User Message]\n{msg['content']}"
+                    })
+                    merged = True
+                else:
+                    result.append(msg)
+            # If no user message yet, just add system as user
+            if not merged and self.system_prompt:
+                result.append({"role": "user", "content": self.system_prompt})
+        else:
+            if self.system_prompt:
+                result.append({"role": "system", "content": self.system_prompt})
+            result.extend(self.messages)
+        
         return result
 
     def get_conversation_text(self) -> str:
