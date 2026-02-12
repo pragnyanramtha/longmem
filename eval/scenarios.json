@@ -65,7 +65,7 @@
     },
     {
       "turn": 15,
-      "content": "I'm thinking of grabbing a snack. Any suggestions?",
+      "content": "I'm hungry, but I need to be careful. Remind me what I'm allergic to?",
       "expected_keys": [
         "allergy"
       ],
@@ -75,11 +75,11 @@
         "allergic",
         "allergy"
       ],
-      "description": "[early] Should avoid peanuts/shellfish (planted turn 2)"
+      "description": "[early] Should recall peanut/shellfish allergy"
     },
     {
       "turn": 25,
-      "content": "Can we set up a call at 9 AM tomorrow?",
+      "content": "I was thinking of a 9 AM call tomorrow. Does that work with my schedule?",
       "expected_keys": [
         "schedule_constraint"
       ],
@@ -88,13 +88,13 @@
         "night shift",
         "not before",
         "after 11",
-        "morning"
+        "too early"
       ],
-      "description": "[early] Should flag 9 AM is before 11 AM constraint (planted turn 5)"
+      "description": "[early] Should flag 9 AM is before 11 AM constraint"
     },
     {
       "turn": 35,
-      "content": "Recommend a laptop OS for me.",
+      "content": "I need to install an OS on my new laptop. Which one do I usually prefer?",
       "expected_keys": [
         "os_preference"
       ],
@@ -103,11 +103,11 @@
         "mint",
         "open source"
       ],
-      "description": "[early] Should suggest Linux Mint / open source (planted turn 30)"
+      "description": "[early] Should invoke Linux Mint preference"
     },
     {
       "turn": 48,
-      "content": "Help me plan a short weekend trip.",
+      "content": "I'm booking that weekend trip. What was my max budget again?",
       "expected_keys": [
         "vacation_budget"
       ],
@@ -117,11 +117,11 @@
         "budget",
         "rupee"
       ],
-      "description": "[early] Should know budget is 50000 rupees (planted turn 45)"
+      "description": "[early] Should recall budget 50000 rupees"
     },
     {
       "turn": 200,
-      "content": "Can you greet me?",
+      "content": "Hi! Can you remind me of my name?",
       "expected_keys": [
         "name"
       ],
@@ -132,24 +132,23 @@
     },
     {
       "turn": 350,
-      "content": "Suggest a snack recipe for me.",
+      "content": "I'm looking up recipes. What are my dietary restrictions?",
       "expected_keys": [
         "allergy",
         "dietary_preference"
       ],
       "expected_keywords": [
-        "peanut",
-        "shellfish",
-        "allergic",
         "vegetarian",
         "no egg",
-        "no meat"
+        "meat",
+        "shellfish",
+        "peanut"
       ],
-      "description": "Should avoid peanuts, shellfish, eggs, meat"
+      "description": "Should recall vegetarian/no egg/allergies"
     },
     {
       "turn": 500,
-      "content": "Book a meeting for me tomorrow morning.",
+      "content": "Can you book a meeting for 8 AM tomorrow?",
       "expected_keys": [
         "schedule_constraint"
       ],
@@ -157,9 +156,9 @@
         "10 am",
         "10am",
         "after 10",
-        "morning"
+        "too early"
       ],
-      "description": "Should schedule after 10 AM (updated from 11)"
+      "description": "Should catch that 8 AM is too early (constraint is 10 AM)"
     },
     {
       "turn": 600,
@@ -203,7 +202,7 @@
     },
     {
       "turn": 937,
-      "content": "Can you call me tomorrow?",
+      "content": "Can you schedule a call for tomorrow? Please confirm my name, language, and the earliest time I'm available.",
       "expected_keys": [
         "preferred_language",
         "schedule_constraint",
@@ -221,7 +220,7 @@
     },
     {
       "turn": 1000,
-      "content": "Plan my vacation.",
+      "content": "I'm planning that vacation. Remind me of my budget and dietary restrictions.",
       "expected_keys": [
         "vacation_budget",
         "dietary_preference"
