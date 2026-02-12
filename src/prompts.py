@@ -16,6 +16,7 @@ You may:
 
 Rules:
 - Only store DURABLE information: preferences, facts, constraints, commitments, entities, long-term instructions
+- Only store USER-SPECIFIC facts/preferences (e.g. "User lives in Seattle"). Do NOT store general world knowledge or trivia (e.g. "Paris is capital of France") unless it relates to the user directly.
 - Do NOT store ephemeral things: greetings, filler, "ok", "thanks", reactions, questions without answers
 - Use canonical snake_case keys (e.g. "preferred_language" not "the language they like")
 - Be precise with values
