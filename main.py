@@ -90,7 +90,8 @@ def main():
             agent.store.write_snapshot(agent.turn_id)
             console.print(f"[dim]Snapshot saved to snapshots/turn_{agent.turn_id:05d}.md[/dim]")
             continue
-        
+
+      
         # Normal conversation
         result = agent.chat(user_input)
         

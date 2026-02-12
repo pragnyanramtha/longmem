@@ -8,6 +8,7 @@ eval_memory.db
 demo_memory.db
 notebook_demo.db
 test_*.db
+eval_*.db
 
 # Python
 __pycache__/
