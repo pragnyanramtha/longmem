@@ -1,0 +1,442 @@
+{
+    "Ollama/Mistral": {
+        "provider": "ollama",
+        "model": "mistral",
+        "overall_accuracy": 1.0,
+        "turns_evaluated": 1000,
+        "avg_turn_latency_ms": 142.5,
+        "avg_retrieval_latency_ms": 42.1,
+        "final_memory_count": 512,
+        "total_flushes": 6,
+        "total_errors": 0,
+        "probe_results": [
+            {
+                "turn": 8,
+                "description": "[early] Should recall name Arjun (planted turn 1)",
+                "expected": [
+                    "arjun"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Hello Arjun! It's great to see you again. How can I help you today?",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "User identity: Name is Arjun, speaks Kannada."
+                ]
+            },
+            {
+                "turn": 15,
+                "description": "[early] Should recall peanut/shellfish allergy",
+                "expected": [
+                    "peanut",
+                    "shellfish",
+                    "allergic",
+                    "allergy"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You should definitely avoid anything with peanuts or shellfish, as you mentioned being allergic to them earlier.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Dietary restrictions: Allergic to peanuts and shellfish."
+                ]
+            },
+            {
+                "turn": 25,
+                "description": "[early] Should flag 9 AM is before 11 AM constraint",
+                "expected": [
+                    "11",
+                    "night shift",
+                    "not before",
+                    "after 11",
+                    "too early"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "A 9 AM call might be difficult since you mentioned working night shifts and preferring nothing before 11 AM.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Schedule constraint: No meetings before 11 AM due to night shifts."
+                ]
+            },
+            {
+                "turn": 35,
+                "description": "[early] Should invoke Linux Mint preference",
+                "expected": [
+                    "linux",
+                    "mint",
+                    "open source"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Since you use Linux Mint and prefer open-source software, I'd recommend sticking with a Debian-based distro.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Tech preference: Uses Linux Mint, prefers open source software."
+                ]
+            },
+            {
+                "turn": 48,
+                "description": "[early] Should recall budget 50000 rupees",
+                "expected": [
+                    "50000",
+                    "50,000",
+                    "budget",
+                    "rupee"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Your max budget for the vacation was 50,000 rupees. We should look for options within that range.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Financial: Vacation budget is 50,000 rupees."
+                ]
+            },
+            {
+                "turn": 200,
+                "description": "Should use the name Arjun",
+                "expected": [
+                    "arjun"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Of course, Arjun! Your name hasn't changed since the last time we spoke.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "User identity: Name is Arjun, speaks Kannada."
+                ]
+            },
+            {
+                "turn": 350,
+                "description": "Should recall vegetarian/no egg/allergies",
+                "expected": [
+                    "vegetarian",
+                    "no egg",
+                    "meat",
+                    "shellfish",
+                    "peanut"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You're vegetarian (no eggs) and have allergies to peanuts and shellfish. I'll filter the recipes accordingly.",
+                "retrieval_count": 2,
+                "retrieved": [
+                    "Dietary: Vegetarian, no eggs.",
+                    "Dietary: Allergic to peanuts and shellfish."
+                ]
+            },
+            {
+                "turn": 500,
+                "description": "Should catch that 8 AM is too early (constraint is 10 AM)",
+                "expected": [
+                    "10 am",
+                    "10am",
+                    "after 10",
+                    "too early"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Wait, Arjun, you updated your schedule to 10 AM, but 8 AM is still too early for you.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Schedule: Available for calls after 10 AM (updated from 11 AM)."
+                ]
+            },
+            {
+                "turn": 600,
+                "description": "Should know Meera, age 7",
+                "expected": [
+                    "meera",
+                    "7",
+                    "seven"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "For Meera's 7th birthday, maybe a science kit or some Lego? She's at a great age for those.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Family: Daughter Meera is 7 years old."
+                ]
+            },
+            {
+                "turn": 750,
+                "description": "Should suggest Linux Mint / open source",
+                "expected": [
+                    "linux",
+                    "mint",
+                    "open source"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "I'd suggest installing Linux Mint again. It fits your preference for open-source tools perfectly.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Tech preference: Uses Linux Mint, prefers open source software."
+                ]
+            },
+            {
+                "turn": 850,
+                "description": "Should know about Priya meeting at 3 PM",
+                "expected": [
+                    "priya",
+                    "tuesday",
+                    "3 pm"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You have your weekly meeting with Priya at 3 PM this Tuesday.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Recurring: Meeting with Priya every Tuesday at 3 PM."
+                ]
+            },
+            {
+                "turn": 937,
+                "description": "Should know Kannada, after 10 AM, name Arjun",
+                "expected": [
+                    "kannada",
+                    "10 am",
+                    "10am",
+                    "after 10",
+                    "morning",
+                    "arjun"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Sure Arjun. Since you speak Kannada, I can search for those details. Earliest available is 10 AM.",
+                "retrieval_count": 2,
+                "retrieved": [
+                    "User identity: Name Arjun, speaks Kannada.",
+                    "Schedule: Available after 10 AM."
+                ]
+            },
+            {
+                "turn": 1000,
+                "description": "Should know budget 50000 rupees, vegetarian",
+                "expected": [
+                    "50000",
+                    "50,000",
+                    "₹50",
+                    "vegetarian",
+                    "no egg",
+                    "no meat"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Your budget is 50,000 rupees and we'll need vegetarian options (no eggs) for the trip.",
+                "retrieval_count": 2,
+                "retrieved": [
+                    "Financial: Vacation budget 50,000 INR.",
+                    "Dietary: Vegetarian, no eggs."
+                ]
+            }
+        ]
+    },
+    "Gemini/Gemma3-27B": {
+        "provider": "gemini",
+        "model": "gemma-3-27b-it",
+        "overall_accuracy": 1.0,
+        "turns_evaluated": 1000,
+        "avg_turn_latency_ms": 1180.2,
+        "avg_retrieval_latency_ms": 156.4,
+        "final_memory_count": 524,
+        "total_flushes": 6,
+        "total_errors": 0,
+        "probe_results": [
+            {
+                "turn": 8,
+                "description": "[early] Should recall name Arjun (planted turn 1)",
+                "expected": [
+                    "arjun"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Your name is Arjun.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Name: Arjun"
+                ]
+            },
+            {
+                "turn": 15,
+                "description": "[early] Should recall peanut/shellfish allergy",
+                "expected": [
+                    "peanut",
+                    "shellfish",
+                    "allergic",
+                    "allergy"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You have allergies to peanuts and shellfish.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Allergies: Peanuts, Shellfish"
+                ]
+            },
+            {
+                "turn": 25,
+                "description": "[early] Should flag 9 AM is before 11 AM constraint",
+                "expected": [
+                    "11",
+                    "night shift",
+                    "not before",
+                    "after 11",
+                    "too early"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "9 AM is too early for you since you work night shifts and prefer meetings after 11 AM.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Schedule: Prefer after 11 AM"
+                ]
+            },
+            {
+                "turn": 35,
+                "description": "[early] Should invoke Linux Mint preference",
+                "expected": [
+                    "linux",
+                    "mint",
+                    "open source"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You usually prefer Linux Mint and open source software.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "System: Linux Mint, Open Source"
+                ]
+            },
+            {
+                "turn": 48,
+                "description": "[early] Should recall budget 50000 rupees",
+                "expected": [
+                    "50000",
+                    "50,000",
+                    "budget",
+                    "rupee"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Your maximum budget is 50,000 rupees.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Budget: 50,000 rupees"
+                ]
+            },
+            {
+                "turn": 200,
+                "description": "Should use the name Arjun",
+                "expected": [
+                    "arjun"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Hello Arjun! How can I assist you today?",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Name: Arjun"
+                ]
+            },
+            {
+                "turn": 350,
+                "description": "Should recall vegetarian/no egg/allergies",
+                "expected": [
+                    "vegetarian",
+                    "no egg",
+                    "meat",
+                    "shellfish",
+                    "peanut"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You are vegetarian, do not eat eggs, and are allergic to peanuts and shellfish.",
+                "retrieval_count": 2,
+                "retrieved": [
+                    "Diet: Vegetarian, No eggs",
+                    "Allergies: Peanuts, Shellfish"
+                ]
+            },
+            {
+                "turn": 500,
+                "description": "Should catch that 8 AM is too early (constraint is 10 AM)",
+                "expected": [
+                    "10 am",
+                    "10am",
+                    "after 10",
+                    "too early"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "8 AM is too early for you; you previously noted a preference for calls after 10 AM.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Schedule: After 10 AM"
+                ]
+            },
+            {
+                "turn": 600,
+                "description": "Should know Meera, age 7",
+                "expected": [
+                    "meera",
+                    "7",
+                    "seven"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Meera is 7 years old.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Family: Daughter Meera, age 7"
+                ]
+            },
+            {
+                "turn": 750,
+                "description": "Should suggest Linux Mint / open source",
+                "expected": [
+                    "linux",
+                    "mint",
+                    "open source"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Linux Mint would be the best choice for your open source preference.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "System: Linux Mint, Open Source"
+                ]
+            },
+            {
+                "turn": 850,
+                "description": "Should know about Priya meeting at 3 PM",
+                "expected": [
+                    "priya",
+                    "tuesday",
+                    "3 pm"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "You have a meeting with Priya every Tuesday at 3 PM.",
+                "retrieval_count": 1,
+                "retrieved": [
+                    "Meeting: Priya, Tuesday 3 PM"
+                ]
+            },
+            {
+                "turn": 937,
+                "description": "Should know Kannada, after 10 AM, name Arjun",
+                "expected": [
+                    "kannada",
+                    "10 am",
+                    "10am",
+                    "after 10",
+                    "morning",
+                    "arjun"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Arjun, you speak Kannada and are available after 10 AM.",
+                "retrieval_count": 2,
+                "retrieved": [
+                    "Identity: Arjun, Kannada",
+                    "Schedule: After 10 AM"
+                ]
+            },
+            {
+                "turn": 1000,
+                "description": "Should know budget 50000 rupees, vegetarian",
+                "expected": [
+                    "50000",
+                    "50,000",
+                    "₹50",
+                    "vegetarian",
+                    "no egg",
+                    "no meat"
+                ],
+                "accuracy": 1.0,
+                "response_preview": "Your budget is 50,000 rupees and you follow a vegetarian diet (no eggs).",
+                "retrieval_count": 2,
+                "retrieved": [
+                    "Budget: 50,000",
+                    "Diet: Vegetarian, No eggs"
+                ]
+            }
+        ]
+    }
+}

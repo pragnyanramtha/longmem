@@ -33,10 +33,11 @@ class LongMemAgent:
         api_key: str | None = None,
         base_url: str | None = None,
         provider: str = "groq",
-        model: str = "llama-3.1-8b-instant",
+        model: str = "llama-3.3-70b-versatile",
         db_path: str = "memory.db",
         context_limit: int = 8192,
         flush_threshold: float = 0.70,
+        verbose: bool = False,
     ):
         # Initialize LLM client
         self.provider = provider
@@ -63,10 +64,11 @@ class LongMemAgent:
             self.client = openai.OpenAI(api_key=api_key, base_url=base_url)
 
         self.model = model
+        self.verbose = verbose
 
         # Components
         self.store = MemoryStore(db_path)
-        self.distiller = MemoryDistiller(self.client, model=model)
+        self.distiller = MemoryDistiller(self.client, model=model, provider=provider, verbose=verbose)
         self.retriever = MemoryRetriever(self.store)
         self.ctx = ContextManager(
             model_context_limit=context_limit,
@@ -216,18 +218,42 @@ class LongMemAgent:
 
     def _apply_distilled(self, distilled: list[DistilledMemory]):
         """Apply distilled memory operations to the store."""
+        if self.verbose:
+            print(f"\n[AGENT] Applying {len(distilled)} memory operations")
+        
         for dm in distilled:
             if dm.action == "add":
+                # Dedup: if key already exists with same value, skip
+                existing = self.store.find_by_key(dm.key)
+                if existing:
+                    if existing.value.strip().lower() == dm.value.strip().lower():
+                        if self.verbose:
+                            print(f"  SKIP (duplicate) | {dm.key}")
+                        continue  # exact duplicate — skip
+                    else:
+                        # Key exists but value changed — treat as update
+                        if self.verbose:
+                            print(f"  AUTO-UPDATE | {dm.key}: {existing.value[:40]}... → {dm.value[:40]}...")
+                        self.store.deactivate_by_key(dm.key)
+                else:
+                    if self.verbose:
+                        print(f"  ADD | {dm.type:12} | {dm.key}: {dm.value[:50]}...")
                 self.store.add_memory(dm, self.turn_id)
             
             elif dm.action == "update":
+                if self.verbose:
+                    print(f"  UPDATE | {dm.key}")
                 self.store.deactivate_by_key(dm.key)
                 self.store.add_memory(dm, self.turn_id)
             
             elif dm.action == "expire":
+                if self.verbose:
+                    print(f"  EXPIRE | {dm.key}")
                 self.store.deactivate_by_key(dm.key)
             
             # "keep" → no-op
+            elif dm.action == "keep" and self.verbose:
+                print(f"  KEEP | {dm.key}")
 
     def _rebuild_system_prompt(self, query_memories: list[Memory] | None = None):
         """Construct system prompt from profile + optional retrieved memories."""
@@ -235,19 +261,26 @@ class LongMemAgent:
 
         # Profile section
         if profile:
-            profile_yaml = "\\n".join(f"- {k}: {v}" for k, v in profile.items())
+            profile_yaml = "\n".join(f"- {k}: {v}" for k, v in profile.items())
             profile_section = PROFILE_SECTION.format(profile_yaml=profile_yaml)
         else:
             profile_section = ""
 
         # Memories section
         if query_memories:
+            profile_keys = set(profile.keys()) if profile else set()
             mem_lines = []
             for m in query_memories:
-                mem_lines.append(f"- [{m.type}] {m.key}: {m.value}")
-            memories_section = MEMORIES_SECTION.format(
-                memories_list="\\n".join(mem_lines)
-            )
+                # Deduplicate: don't show here if already in profile section
+                if m.key not in profile_keys:
+                    mem_lines.append(f"- [{m.type}] {m.key}: {m.value}")
+            
+            if mem_lines:
+                memories_section = MEMORIES_SECTION.format(
+                    memories_list="\n".join(mem_lines)
+                )
+            else:
+                memories_section = ""
         else:
             memories_section = ""
 

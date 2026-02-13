@@ -43,11 +43,12 @@ def evaluate():
     parser.add_argument("--base-url", help="Base URL for the LLM API")
     parser.add_argument("--model", default="llama-3.1-8b-instant", help="Model name")
     parser.add_argument("--db", default="eval_memory.db", help="Path to database file")
-    parser.add_argument("--limit", type=int, default=2048, help="Context limit")
-    parser.add_argument("--flush", type=float, default=0.70, help="Flush threshold")
+    parser.add_argument("--limit", type=int, default=8192, help="Context limit")
+    parser.add_argument("--flush", type=float, default=0.75, help="Flush threshold")
     parser.add_argument("--turns", type=int, default=None, help="Number of turns to evaluate (defaults to full conversation length)")
     parser.add_argument("--quick", action="store_true", help="Use quick scenario/conversation for faster evaluation")
     parser.add_argument("--export", help="Export detailed results to JSON file")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Enable verbose debug logging")
     args = parser.parse_args()
     
     # Auto-detect conversation/scenarios based on --quick flag
@@ -109,7 +110,8 @@ def evaluate():
         model=args.model,
         db_path=args.db, 
         context_limit=args.limit, 
-        flush_threshold=args.flush
+        flush_threshold=args.flush,
+        verbose=args.verbose,
     )
     
     # Enhanced metrics tracking

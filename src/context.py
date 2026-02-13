@@ -102,11 +102,15 @@ class ContextManager:
     def get_conversation_text(self) -> str:
         """
         Render all messages as plain text for the distiller.
+        Assistant messages are truncated to reduce noise and token usage.
         Format: 'USER: ...\nASSISTANT: ...\n'
         """
         lines = []
         for msg in self.messages:
-            lines.append(f"{msg['role'].upper()}: {msg['content']}")
+            content = msg["content"]
+            if msg["role"] == "assistant" and len(content) > 500:
+                content = content[:500] + "... [truncated]"
+            lines.append(f"{msg['role'].upper()}: {content}")
         return "\n\n".join(lines)
 
     def message_count(self) -> int:

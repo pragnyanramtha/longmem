@@ -1,6 +1,6 @@
 # Atlas - Long-Form Memory System
 
-A production-ready conversational AI agent with **persistent, queryable memory** that can recall information from turn 1 even at turn 1000.
+A conversational AI agent with **persistent, queryable memory** that can recall information from turn 1 even at turn 1000.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)

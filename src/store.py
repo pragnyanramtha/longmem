@@ -165,6 +165,14 @@ class MemoryStore:
         ).fetchall()
         return [self._row_to_memory(r) for r in rows]
 
+    def find_by_key(self, key: str) -> Memory | None:
+        """Find an active memory by key. Returns first match or None."""
+        row = self.db.execute(
+            "SELECT * FROM memories WHERE key = ? AND is_active = 1 LIMIT 1",
+            (key,)
+        ).fetchone()
+        return self._row_to_memory(row) if row else None
+
     def get_profile(self) -> dict[str, str]:
         """Get the current user profile as a dict."""
         rows = self.db.execute("SELECT key, value FROM profile").fetchall()
