@@ -15,3 +15,8 @@ dependencies = [
     "sqlite-vec>=0.1.6",
     "tiktoken>=0.12.0",
 ]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]
