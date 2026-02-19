@@ -12,6 +12,7 @@ from .store import MemoryStore
 from .context import ContextManager
 from .distiller import MemoryDistiller
 from .retriever import MemoryRetriever
+from .consolidator import MemoryConsolidator
 from .prompts import SYSTEM_PROMPT_TEMPLATE, PROFILE_SECTION, MEMORIES_SECTION
 
 
@@ -70,6 +71,7 @@ class LongMemAgent:
         self.store = MemoryStore(db_path)
         self.distiller = MemoryDistiller(self.client, model=model, provider=provider, verbose=verbose)
         self.retriever = MemoryRetriever(self.store)
+        self.consolidator = MemoryConsolidator(self.store, client=self.client, model=model, provider=provider)
         self.ctx = ContextManager(
             model_context_limit=context_limit,
             flush_threshold=flush_threshold,
@@ -109,7 +111,7 @@ class LongMemAgent:
 
         # ── STEP 2: Retrieve relevant memories ──
         retrieval_start = time.time()
-        results = self.retriever.retrieve(user_message, top_k=5)
+        results = self.retriever.retrieve(user_message, top_k=5, current_turn=self.turn_id)
         retrieved_memories = [r.memory for r in results]
         retrieval_ms = (time.time() - retrieval_start) * 1000
         
@@ -215,6 +217,13 @@ class LongMemAgent:
         self.ctx.reset(self.ctx.system_prompt)
         self.segment_start_turn = self.turn_id
         self.total_flushes += 1
+
+        # Run consolidation periodically (every 5 flushes)
+        if self.total_flushes % 5 == 0:
+            report = self.consolidator.run_consolidation(self.turn_id)
+            if self.verbose:
+                print(f"  [CONSOLIDATION] merged={report.duplicates_merged}, "
+                      f"decayed={report.memories_decayed}, expired={report.memories_expired}")
 
     def _apply_distilled(self, distilled: list[DistilledMemory]):
         """Apply distilled memory operations to the store."""
