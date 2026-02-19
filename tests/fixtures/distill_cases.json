@@ -1,0 +1,1007 @@
+{
+  "cases": [
+    {
+      "id": "world_fact_wifi",
+      "category": "world_fact_rejection",
+      "description": "User asks how WiFi works - pure world-fact question",
+      "conversation": "USER: How does WiFi work?\n\nASSISTANT: WiFi uses radio waves in the 2.4 GHz and 5 GHz frequency bands to transmit data between your device and a wireless router. The router is connected to the internet via a modem, and it converts the data into radio signals that your device's wireless adapter can receive and decode.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["wifi_explanation", "topic_discussed", "how_wifi_works"],
+      "notes": "Pure world-fact question about technology. The user reveals nothing about themselves. A different user asking this exact question would get the same answer."
+    },
+    {
+      "id": "world_fact_photosynthesis",
+      "category": "world_fact_rejection",
+      "description": "User asks about photosynthesis - science world-fact",
+      "conversation": "USER: Can you explain photosynthesis to me?\n\nASSISTANT: Photosynthesis is the process by which green plants and some other organisms convert light energy into chemical energy. Plants absorb sunlight through chlorophyll in their leaves, take in carbon dioxide from the air, and water from the soil to produce glucose and oxygen.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["photosynthesis", "science_explanation", "topic_discussed", "curiosity_about"],
+      "notes": "Science explanation request. No user-specific information whatsoever."
+    },
+    {
+      "id": "world_fact_capital",
+      "category": "world_fact_rejection",
+      "description": "User asks about the capital of France - history/geography",
+      "conversation": "USER: What's the capital of France?\n\nASSISTANT: The capital of France is Paris. It's been the capital since the late 10th century and is home to iconic landmarks like the Eiffel Tower and the Louvre Museum.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["capital", "france", "paris", "geography"],
+      "notes": "Straightforward geography trivia. Not a user fact."
+    },
+    {
+      "id": "world_fact_recipe",
+      "category": "world_fact_rejection",
+      "description": "User asks for a recipe without stating dietary constraints",
+      "conversation": "USER: How do I make spaghetti carbonara?\n\nASSISTANT: Here's a classic spaghetti carbonara recipe: Cook 400g spaghetti. In a bowl, mix 4 egg yolks with 100g grated Pecorino Romano. Fry 200g guanciale until crispy. Toss the hot pasta with the guanciale, then quickly mix in the egg and cheese mixture off the heat. Season with black pepper.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["recipe", "cooking_tip", "how_to"],
+      "notes": "Recipe request with no personal info. Asking for a recipe does not imply a preference for that cuisine."
+    },
+    {
+      "id": "world_fact_engine",
+      "category": "world_fact_rejection",
+      "description": "User asks how a car engine works",
+      "conversation": "USER: How does a combustion engine work?\n\nASSISTANT: An internal combustion engine works through a four-stroke cycle: intake (fuel-air mixture enters the cylinder), compression (the piston compresses the mixture), combustion (spark plug ignites the mixture, pushing the piston down), and exhaust (spent gases are expelled). This cycle repeats thousands of times per minute to generate rotational force.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["engine", "combustion", "mechanism", "explanation"],
+      "notes": "Technical world-fact about engines. Nothing about the user."
+    },
+    {
+      "id": "world_fact_dna",
+      "category": "world_fact_rejection",
+      "description": "User asks about DNA structure",
+      "conversation": "USER: What is DNA made of?\n\nASSISTANT: DNA is made of nucleotides, each containing a phosphate group, a deoxyribose sugar, and one of four nitrogenous bases: adenine (A), thymine (T), guanine (G), and cytosine (C). Two strands of nucleotides wind around each other in a double helix structure, with the bases pairing A-T and G-C.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["dna", "biology", "science", "explanation"],
+      "notes": "Biology world-fact. No user-specific information."
+    },
+    {
+      "id": "meta_noise_single_question",
+      "category": "meta_noise_rejection",
+      "description": "User asks a single question about chess - not an interest",
+      "conversation": "USER: Tell me about chess.\n\nASSISTANT: Chess is a two-player strategy board game played on an 8x8 grid. Each player starts with 16 pieces: one king, one queen, two rooks, two knights, two bishops, and eight pawns. The objective is to checkmate your opponent's king.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["chess", "interest_in", "curiosity_about", "topic_discussed"],
+      "notes": "A single question about a topic is NOT an interest or preference. The prompt explicitly says: 'Tell me about chess' does NOT equal interest_in_chess."
+    },
+    {
+      "id": "meta_noise_trending",
+      "category": "meta_noise_rejection",
+      "description": "User asks what's trending - no personal info",
+      "conversation": "USER: What's trending in tech news this week?\n\nASSISTANT: Some trending tech topics this week include new advances in AI language models, Apple's upcoming product announcements, and ongoing debates about data privacy regulations in the EU.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["trending", "tech_news", "topic_discussed", "interest_in"],
+      "notes": "Asking about trending topics is idle curiosity, not a personal fact."
+    },
+    {
+      "id": "meta_noise_greeting",
+      "category": "meta_noise_rejection",
+      "description": "User greets and says thanks - pure filler",
+      "conversation": "USER: Hello there!\n\nASSISTANT: Hello! How can I help you today?\n\nUSER: Oh nothing specific, just checking in. Thanks!\n\nASSISTANT: No problem! Feel free to ask if you need anything.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["greeting", "filler", "conversation_topic"],
+      "notes": "Pure filler conversation. Greetings and thanks reveal nothing about the user."
+    },
+    {
+      "id": "meta_noise_ok_thanks",
+      "category": "meta_noise_rejection",
+      "description": "User acknowledges with ok and thanks after a previous exchange",
+      "conversation": "USER: Ok cool, thanks for explaining that!\n\nASSISTANT: You're welcome! Let me know if you have any other questions.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["acknowledgment", "filler", "gratitude"],
+      "notes": "Acknowledgment filler. No user information."
+    },
+    {
+      "id": "meta_noise_movie_rec",
+      "category": "meta_noise_rejection",
+      "description": "User asks for a movie recommendation without stating preferences",
+      "conversation": "USER: Can you recommend a good movie to watch tonight?\n\nASSISTANT: I'd suggest 'Everything Everywhere All at Once' - it's a creative and entertaining film that blends action, comedy, and drama. It won several Academy Awards and has broad appeal.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["movie_recommendation", "interest_in", "entertainment"],
+      "notes": "Asking for a generic recommendation does not reveal a preference. The user did not state a genre or taste."
+    },
+    {
+      "id": "transient_debugging",
+      "category": "transient_rejection",
+      "description": "User mentions they are currently debugging something",
+      "conversation": "USER: I'm debugging this weird segfault in my C code right now. The pointer seems valid but it crashes on dereference.\n\nASSISTANT: That sounds like it could be a use-after-free or a stack corruption issue. Try running your code through Valgrind or AddressSanitizer to pinpoint the exact memory error.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["debugging", "current_task", "segfault", "topic_discussed"],
+      "notes": "Transient debugging state. 'I'm debugging X right now' is a temporary activity, not a lasting fact about the user."
+    },
+    {
+      "id": "transient_error",
+      "category": "transient_rejection",
+      "description": "User mentions a current error they are looking at",
+      "conversation": "USER: I'm looking at this error right now: TypeError: Cannot read properties of undefined. What does it mean?\n\nASSISTANT: This JavaScript error means you're trying to access a property on a value that is undefined. Check that the object you're accessing exists before trying to read its properties.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["error", "current_task", "javascript_error", "topic_discussed"],
+      "notes": "Temporary debugging state. The error is fleeting and not a user fact."
+    },
+    {
+      "id": "transient_location",
+      "category": "transient_rejection",
+      "description": "User mentions temporary location",
+      "conversation": "USER: I'm at the coffee shop and the wifi here is terrible. Can you help me compress this image offline?\n\nASSISTANT: Sure! You can use ImageMagick from the command line: `convert input.jpg -quality 60 output.jpg`. No internet needed.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["coffee_shop", "current_location", "temporary_location"],
+      "notes": "Being at a coffee shop is a transient state, not a lasting fact. Do not store temporary locations."
+    },
+    {
+      "id": "transient_password_reset",
+      "category": "transient_rejection",
+      "description": "User asks about a one-time task",
+      "conversation": "USER: How do I reset my Gmail password? I forgot it.\n\nASSISTANT: Go to accounts.google.com, click 'Forgot password', and follow the recovery steps. You'll need access to your recovery phone or email.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["password_reset", "gmail", "how_to", "tutorial"],
+      "notes": "One-time task. Forgetting a password is transient. The fact they use Gmail might be inferred but is too weak from a single mention in a help request."
+    },
+    {
+      "id": "transient_weather_check",
+      "category": "transient_rejection",
+      "description": "User asks about current weather",
+      "conversation": "USER: What's the weather like in Tokyo today?\n\nASSISTANT: I don't have real-time weather data, but you can check weather.com or a weather app for current Tokyo conditions.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["weather", "tokyo", "topic_discussed"],
+      "notes": "Asking about weather in a city does not mean the user lives there. Transient query."
+    },
+    {
+      "id": "explicit_name",
+      "category": "user_fact_extraction",
+      "description": "User states their name explicitly",
+      "conversation": "USER: Hey, my name is Priya.\n\nASSISTANT: Nice to meet you, Priya! How can I help you today?",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_name",
+          "value": "Priya",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Clear explicit self-identification. High confidence name extraction."
+    },
+    {
+      "id": "explicit_dietary",
+      "category": "user_fact_extraction",
+      "description": "User states dietary preference explicitly",
+      "conversation": "USER: I'm vegetarian, can you suggest a dinner recipe?\n\nASSISTANT: Sure! How about a creamy mushroom risotto? You'll need arborio rice, mushrooms, vegetable broth, parmesan, and white wine.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "dietary",
+          "key": "dietary_preference",
+          "value": "vegetarian",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["recipe", "mushroom_risotto"],
+      "notes": "Clear explicit user preference. The recipe itself should NOT be stored, only the dietary preference."
+    },
+    {
+      "id": "explicit_occupation",
+      "category": "user_fact_extraction",
+      "description": "User mentions their job explicitly",
+      "conversation": "USER: As a data scientist, I spend most of my day in Jupyter notebooks. Any tips for faster workflows?\n\nASSISTANT: Definitely! Try using keyboard shortcuts extensively, set up autoreload for modules, and consider JupyterLab for a more IDE-like experience.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "professional",
+          "key": "occupation",
+          "value": "data scientist",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["jupyter_tips", "topic_discussed"],
+      "notes": "User explicitly identifies as a data scientist. The workflow tips are assistant output, not user facts."
+    },
+    {
+      "id": "explicit_family_member",
+      "category": "user_fact_extraction",
+      "description": "User mentions a family member by name",
+      "conversation": "USER: My son Rohan just turned 5 and he's really into dinosaurs. Any book suggestions for his age?\n\nASSISTANT: Great age for dinosaur books! Try 'National Geographic Little Kids First Big Book of Dinosaurs' or 'How Do Dinosaurs Say Good Night?' by Jane Yolen.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "entity",
+          "category": "family",
+          "key": "son_name",
+          "value": "Rohan, 5 years old",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["book_recommendation", "dinosaurs"],
+      "notes": "User reveals a family member (son) with name and age. The book recommendations are assistant output."
+    },
+    {
+      "id": "explicit_location",
+      "category": "user_fact_extraction",
+      "description": "User states their city of residence",
+      "conversation": "USER: I live in Bangalore and the traffic here is insane. What's the best time to commute?\n\nASSISTANT: Bangalore traffic peaks between 8:30-10:30 AM and 5:30-8 PM. If possible, try commuting before 7:30 AM or after 10:30 AM to avoid the worst of it.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_location",
+          "value": "Bangalore",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["traffic", "commute_times"],
+      "notes": "User explicitly states 'I live in Bangalore'. Clear location fact. Traffic info is world knowledge."
+    },
+    {
+      "id": "explicit_allergy",
+      "category": "user_fact_extraction",
+      "description": "User mentions an allergy",
+      "conversation": "USER: I'm allergic to peanuts and shellfish. Can you help me check if this restaurant menu is safe?\n\nASSISTANT: Of course! Please share the menu and I'll flag any items that may contain peanuts or shellfish.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "constraint",
+          "category": "health",
+          "key": "allergy",
+          "value": "peanuts and shellfish",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Allergy is a critical user constraint. High confidence because explicitly stated."
+    },
+    {
+      "id": "explicit_schedule",
+      "category": "user_fact_extraction",
+      "description": "User states a recurring commitment",
+      "conversation": "USER: I have yoga class every Wednesday at 6 PM, so don't suggest anything during that time.\n\nASSISTANT: Got it! I'll keep your Wednesday 6 PM yoga class in mind when suggesting schedules.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "commitment",
+          "category": "schedule",
+          "key": "yoga_class",
+          "value": "every Wednesday at 6 PM",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Recurring commitment with specific day and time. Also an implicit instruction to avoid that slot."
+    },
+    {
+      "id": "explicit_language",
+      "category": "user_fact_extraction",
+      "description": "User states their language preference",
+      "conversation": "USER: I speak Tamil at home but prefer English for technical discussions.\n\nASSISTANT: That makes sense! I'll keep our technical conversations in English. Let me know if you ever want me to switch.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "language",
+          "key": "preferred_language",
+          "value": "English for technical discussions, Tamil at home",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "User explicitly states language preferences with context. Could be stored as one or two memories."
+    },
+    {
+      "id": "explicit_instruction",
+      "category": "user_fact_extraction",
+      "description": "User gives a standing instruction",
+      "conversation": "USER: Always give me code examples in Python, not JavaScript.\n\nASSISTANT: Understood! I'll default to Python for all code examples going forward.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "instruction",
+          "category": "communication",
+          "key": "preferred_code_language",
+          "value": "Python, not JavaScript",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Direct standing instruction. 'Always' signals this is a persistent preference, not a one-time request."
+    },
+    {
+      "id": "implicit_vegetarian",
+      "category": "implicit_extraction",
+      "description": "User consistently chooses vegetarian options without stating preference",
+      "conversation": "USER: For the dinner party menu, I'll go with the mushroom Wellington, the roasted vegetable platter, and the paneer tikka. Skip the lamb.\n\nASSISTANT: Great choices! The mushroom Wellington is a showstopper. I'll put together a shopping list for those three dishes.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "dietary",
+          "key": "dietary_preference",
+          "value": "vegetarian (inferred from choices)",
+          "min_confidence": 0.6
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "All chosen dishes are vegetarian and user explicitly skips meat. Inference is reasonable but not certain - could just be for this event. Lower confidence."
+    },
+    {
+      "id": "implicit_timezone",
+      "category": "implicit_extraction",
+      "description": "User reveals timezone indirectly",
+      "conversation": "USER: It's 3 AM here and I still can't sleep. Any tips?\n\nASSISTANT: Try a screen break, some deep breathing exercises, or a warm caffeine-free drink. Avoid looking at the clock, as that can increase anxiety about not sleeping.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_timezone_hint",
+          "value": "mentioned it was 3 AM during conversation",
+          "min_confidence": 0.5
+        }
+      ],
+      "expected_rejections": ["sleep_tip"],
+      "notes": "The user indirectly reveals their local time. This can help infer timezone but confidence is lower since we'd need to know the server's time."
+    },
+    {
+      "id": "implicit_tech_stack",
+      "category": "implicit_extraction",
+      "description": "User mentions tools they use in passing",
+      "conversation": "USER: Let me check in my VS Code... yeah, the linter is flagging this import as unused but I'm definitely using it in the test file.\n\nASSISTANT: This is likely because your linter is only analyzing the current file scope. You can add a `# noqa` comment or configure the linter to recognize cross-file usage.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "tools",
+          "key": "code_editor",
+          "value": "VS Code",
+          "min_confidence": 0.7
+        }
+      ],
+      "expected_rejections": ["linter_issue", "topic_discussed"],
+      "notes": "User casually mentions using VS Code, implying it is their editor. Not a direct statement but a reasonable inference."
+    },
+    {
+      "id": "implicit_os",
+      "category": "implicit_extraction",
+      "description": "User reveals OS through command usage",
+      "conversation": "USER: I ran `brew install ffmpeg` but it's saying command not found. I'm on a fresh MacBook.\n\nASSISTANT: You need to install Homebrew first. Run this in Terminal: /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "tools",
+          "key": "operating_system",
+          "value": "macOS (MacBook)",
+          "min_confidence": 0.85
+        }
+      ],
+      "expected_rejections": ["homebrew_installation", "topic_discussed"],
+      "notes": "User explicitly says 'I'm on a fresh MacBook' which directly reveals their OS. This is closer to explicit than implicit."
+    },
+    {
+      "id": "implicit_night_owl",
+      "category": "implicit_extraction",
+      "description": "User implies a schedule pattern without stating it directly",
+      "conversation": "USER: I usually start working around noon and go until 2 or 3 AM. Can you suggest a meal prep plan that fits weird hours?\n\nASSISTANT: For a noon-to-3AM schedule, I'd suggest a big brunch around 12:30, a late lunch at 5 PM, and a light dinner at 10 PM. Prep your meals on Sunday to save time during the week.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "schedule",
+          "key": "work_schedule",
+          "value": "noon to 2-3 AM",
+          "min_confidence": 0.85
+        }
+      ],
+      "expected_rejections": ["meal_prep_plan"],
+      "notes": "User describes their typical work hours. 'Usually' signals this is a regular pattern, not a one-time thing."
+    },
+    {
+      "id": "correction_name",
+      "category": "correction_update",
+      "description": "User corrects their name from existing memory",
+      "conversation": "USER: Actually, I go by Vik now, not Vikram.\n\nASSISTANT: Got it, Vik! I'll use that name from now on.",
+      "existing_memories": [
+        {
+          "id": "mem_abc12345",
+          "type": "fact",
+          "category": "personal",
+          "key": "user_name",
+          "value": "Vikram",
+          "confidence": 0.95,
+          "source_turn": 1
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_name",
+          "value": "Vik",
+          "action": "update",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "User explicitly corrects their name. The existing memory for user_name should be updated, not a new one added."
+    },
+    {
+      "id": "correction_location",
+      "category": "correction_update",
+      "description": "User updates their location - moved cities",
+      "conversation": "USER: Actually I moved to Berlin last month. I'm no longer in Mumbai.\n\nASSISTANT: Welcome to Berlin! That's a big move. Let me know if you need any tips for settling in.",
+      "existing_memories": [
+        {
+          "id": "mem_loc00001",
+          "type": "fact",
+          "category": "personal",
+          "key": "user_location",
+          "value": "Mumbai",
+          "confidence": 0.95,
+          "source_turn": 5
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_location",
+          "value": "Berlin",
+          "action": "update",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "User explicitly contradicts existing location memory. Should trigger an update from Mumbai to Berlin."
+    },
+    {
+      "id": "correction_diet_change",
+      "category": "correction_update",
+      "description": "User revokes a dietary preference",
+      "conversation": "USER: I've started eating meat again, so I'm no longer vegetarian. Can you suggest a steak recipe?\n\nASSISTANT: Welcome back to the carnivore side! For a great steak, try a reverse sear method...",
+      "existing_memories": [
+        {
+          "id": "mem_diet0001",
+          "type": "preference",
+          "category": "dietary",
+          "key": "dietary_preference",
+          "value": "vegetarian",
+          "confidence": 0.95,
+          "source_turn": 10
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "dietary",
+          "key": "dietary_preference",
+          "value": "no longer vegetarian, eats meat",
+          "action": "update",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["steak_recipe"],
+      "notes": "User explicitly revokes the vegetarian preference. The existing memory should be updated or expired."
+    },
+    {
+      "id": "correction_schedule_update",
+      "category": "correction_update",
+      "description": "User updates a schedule constraint",
+      "conversation": "USER: I changed my availability. I can take calls after 9 AM now instead of 11 AM.\n\nASSISTANT: Noted! Your availability now starts at 9 AM. I'll keep that in mind for scheduling.",
+      "existing_memories": [
+        {
+          "id": "mem_sched001",
+          "type": "constraint",
+          "category": "schedule",
+          "key": "availability_start",
+          "value": "after 11 AM",
+          "confidence": 0.95,
+          "source_turn": 5
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "constraint",
+          "category": "schedule",
+          "key": "availability_start",
+          "value": "after 9 AM",
+          "action": "update",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Direct update to an existing schedule constraint. Old value should be replaced."
+    },
+    {
+      "id": "correction_expire_instruction",
+      "category": "correction_update",
+      "description": "User revokes a standing instruction",
+      "conversation": "USER: You can stop confirming before sending emails now. I trust the system.\n\nASSISTANT: Understood! I'll send emails directly without confirmation from now on.",
+      "existing_memories": [
+        {
+          "id": "mem_inst0001",
+          "type": "instruction",
+          "category": "communication",
+          "key": "email_confirmation",
+          "value": "always confirm before sending email",
+          "confidence": 0.95,
+          "source_turn": 20
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "instruction",
+          "category": "communication",
+          "key": "email_confirmation",
+          "value": "no longer requires confirmation before sending email",
+          "action": "expire",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "User explicitly revokes a standing instruction. The existing memory should be expired or updated."
+    },
+    {
+      "id": "mixed_name_and_weather",
+      "category": "mixed_conversation",
+      "description": "User gives their name then asks about weather",
+      "conversation": "USER: Hi, I'm Deepak. What's the weather going to be like this weekend?\n\nASSISTANT: Hi Deepak! I don't have access to real-time weather data, but you can check weather.com or your phone's weather app for the weekend forecast in your area.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_name",
+          "value": "Deepak",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["weather", "topic_discussed"],
+      "notes": "Mixed: name is a user fact worth storing, weather question is filler. Only the name should be extracted."
+    },
+    {
+      "id": "mixed_job_and_techquestion",
+      "category": "mixed_conversation",
+      "description": "User mentions job while asking a technical question",
+      "conversation": "USER: I'm a backend engineer and I'm trying to optimize our PostgreSQL queries. The EXPLAIN output shows a sequential scan on a table with 10 million rows.\n\nASSISTANT: A sequential scan on a large table usually means there's no suitable index. Check if the WHERE clause columns have indexes. You can create one with CREATE INDEX idx_name ON table_name(column_name).",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "professional",
+          "key": "occupation",
+          "value": "backend engineer",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["postgresql", "query_optimization", "topic_discussed"],
+      "notes": "The occupation is a lasting user fact. The PostgreSQL question is a technical query that should not be stored."
+    },
+    {
+      "id": "mixed_family_and_worldfact",
+      "category": "mixed_conversation",
+      "description": "User mentions family then asks a world-fact question",
+      "conversation": "USER: My wife Anita and I are planning a trip to Japan. How many islands does Japan have?\n\nASSISTANT: Japan is an archipelago consisting of 6,852 islands! The four largest are Honshu, Hokkaido, Kyushu, and Shikoku. For your trip, most tourists focus on Honshu where Tokyo, Kyoto, and Osaka are located.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "entity",
+          "category": "family",
+          "key": "wife_name",
+          "value": "Anita",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["japan_islands", "geography", "topic_discussed"],
+      "notes": "Wife's name is an entity worth storing. The Japan geography facts are world knowledge."
+    },
+    {
+      "id": "mixed_preference_in_question",
+      "category": "mixed_conversation",
+      "description": "User embeds a preference inside a general question",
+      "conversation": "USER: I only use dark mode in all my apps. Is there a way to force dark mode in Chrome on sites that don't support it?\n\nASSISTANT: Yes! Go to chrome://flags and search for 'Auto Dark Mode for Web Contents'. Enable it and restart Chrome. You can also use extensions like Dark Reader.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "interface",
+          "key": "dark_mode_preference",
+          "value": "always uses dark mode in all apps",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["chrome_dark_mode", "how_to"],
+      "notes": "The preference for dark mode is explicit ('I only use dark mode in all my apps'). The Chrome tip is technical assistance."
+    },
+    {
+      "id": "mixed_allergy_and_recipe",
+      "category": "mixed_conversation",
+      "description": "User states constraint then asks for a recipe",
+      "conversation": "USER: I'm gluten intolerant. Can you give me a good pancake recipe?\n\nASSISTANT: Sure! Try using oat flour or almond flour instead of wheat flour. Mix 1 cup oat flour, 1 egg, 3/4 cup milk, 1 tbsp sugar, and 1 tsp baking powder. Cook on a non-stick pan until golden.",
+      "existing_memories": [
+        {
+          "id": "mem_diet0002",
+          "type": "preference",
+          "category": "dietary",
+          "key": "dietary_preference",
+          "value": "vegetarian",
+          "confidence": 0.9,
+          "source_turn": 3
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "constraint",
+          "category": "health",
+          "key": "food_intolerance",
+          "value": "gluten intolerant",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["recipe", "pancake_recipe"],
+      "notes": "Gluten intolerance is a health constraint. The recipe is assistant output. Existing vegetarian preference should be kept."
+    },
+    {
+      "id": "edge_single_message",
+      "category": "edge_case",
+      "description": "Very short conversation - single user message with no response",
+      "conversation": "USER: Hi",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["greeting", "filler"],
+      "notes": "Single-word greeting. Nothing to extract."
+    },
+    {
+      "id": "edge_info_in_question",
+      "category": "edge_case",
+      "description": "User shares info in question form",
+      "conversation": "USER: Did I mention I'm from Mumbai?\n\nASSISTANT: I don't have a record of that, but thanks for letting me know! Mumbai is a wonderful city.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "user_location",
+          "value": "Mumbai",
+          "min_confidence": 0.8
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Even though phrased as a question, the user is asserting they are from Mumbai. Should be extracted with slightly lower confidence due to phrasing."
+    },
+    {
+      "id": "edge_ambiguous_python",
+      "category": "edge_case",
+      "description": "Ambiguous statement - 'I love Python' could mean the language or the snake",
+      "conversation": "USER: I love Python. It's so elegant and readable.\n\nASSISTANT: Python is great! Its clean syntax and extensive library ecosystem make it a pleasure to work with.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "technology",
+          "key": "preferred_programming_language",
+          "value": "Python",
+          "min_confidence": 0.7
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Context clues ('elegant and readable') strongly suggest the programming language. But some ambiguity remains, hence slightly lower confidence."
+    },
+    {
+      "id": "edge_quoting_friend",
+      "category": "edge_case",
+      "description": "User quotes someone else's preference - NOT user's own",
+      "conversation": "USER: My friend Sarah said she's vegan. She wants me to try it too but I love my chicken tikka too much.\n\nASSISTANT: It's hard to give up a good chicken tikka! You could try incorporating some vegan meals a few days a week without fully committing.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "dietary",
+          "key": "dietary_preference",
+          "value": "not vegan, enjoys chicken tikka",
+          "min_confidence": 0.8
+        }
+      ],
+      "expected_rejections": ["friend_sarah_vegan", "sarah_preference"],
+      "notes": "The vegan preference belongs to the friend Sarah, NOT the user. The user actually implies they eat meat (chicken tikka). Should not store Sarah's dietary preference as the user's."
+    },
+    {
+      "id": "edge_hypothetical",
+      "category": "edge_case",
+      "description": "User speaks hypothetically - not a real fact",
+      "conversation": "USER: If I were a doctor, what specialization would pay the most?\n\nASSISTANT: In terms of compensation, neurosurgery, orthopedic surgery, and cardiology tend to be among the highest-paying medical specializations.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["occupation", "doctor", "topic_discussed"],
+      "notes": "Hypothetical statement ('If I were a doctor'). The user is NOT a doctor. Do not store this as their occupation."
+    },
+    {
+      "id": "edge_negation",
+      "category": "edge_case",
+      "description": "User negates a fact about themselves",
+      "conversation": "USER: I don't drink coffee at all. Everyone thinks I'm weird for it.\n\nASSISTANT: You're not alone! Many people prefer tea, water, or other beverages. It's actually better for your sleep cycle.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "dietary",
+          "key": "coffee_preference",
+          "value": "does not drink coffee",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Negation is still a valid user fact. 'I don't drink coffee' is a personal preference worth storing."
+    },
+    {
+      "id": "edge_sarcasm",
+      "category": "edge_case",
+      "description": "User may be sarcastic - hard to parse intent",
+      "conversation": "USER: Oh yeah, I just LOVE waking up at 5 AM for meetings with the US team.\n\nASSISTANT: Early meetings across time zones can be tough! Would you like some tips for adjusting your schedule?",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "professional",
+          "key": "meeting_schedule",
+          "value": "has 5 AM meetings with US team",
+          "min_confidence": 0.7
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Despite sarcastic tone, the underlying fact is real: the user does have early meetings with a US team. The sarcasm expresses displeasure but does not negate the fact. Also implies a non-US timezone."
+    },
+    {
+      "id": "edge_multiple_people",
+      "category": "edge_case",
+      "description": "User mentions multiple entities in one message",
+      "conversation": "USER: My daughter Meera is 7, my dog is named Bruno, and my boss Priya keeps scheduling 8 AM standup calls.\n\nASSISTANT: Sounds like a busy household! 8 AM standups can be rough, especially if you're not a morning person.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "entity",
+          "category": "family",
+          "key": "daughter_name",
+          "value": "Meera, 7 years old",
+          "min_confidence": 0.95
+        },
+        {
+          "type": "entity",
+          "category": "pets",
+          "key": "dog_name",
+          "value": "Bruno",
+          "min_confidence": 0.95
+        },
+        {
+          "type": "entity",
+          "category": "professional",
+          "key": "boss_name",
+          "value": "Priya",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Multiple entities in a single message. Each should be extracted as a separate memory."
+    },
+    {
+      "id": "edge_assistant_info_leakage",
+      "category": "edge_case",
+      "description": "Assistant provides info that should not become a user memory",
+      "conversation": "USER: What programming languages are most popular in 2024?\n\nASSISTANT: According to recent surveys, the most popular programming languages in 2024 are Python, JavaScript, TypeScript, Java, and C#. Python has been especially dominant in AI and data science.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["programming_languages", "popularity", "topic_discussed", "interest_in"],
+      "notes": "Everything in this exchange is world knowledge from the assistant. The user asking about popular languages does not mean they use or prefer any of them."
+    },
+    {
+      "id": "edge_repeated_topic_not_interest",
+      "category": "edge_case",
+      "description": "User asks a follow-up question on the same topic - still not an interest",
+      "conversation": "USER: How does blockchain work?\n\nASSISTANT: Blockchain is a distributed digital ledger that records transactions across a network of computers. Each block contains a set of transactions and a cryptographic hash of the previous block, forming a chain.\n\nUSER: And what about smart contracts?\n\nASSISTANT: Smart contracts are self-executing programs stored on a blockchain that automatically enforce the terms of an agreement when predetermined conditions are met.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["blockchain", "smart_contracts", "interest_in", "topic_discussed", "cryptocurrency"],
+      "notes": "Even follow-up questions on the same topic do not constitute an interest worth storing. The user is just exploring a topic."
+    },
+    {
+      "id": "explicit_email",
+      "category": "user_fact_extraction",
+      "description": "User shares their email address with an instruction",
+      "conversation": "USER: My email is maya.patel@outlook.com. Always CC me when drafting emails.\n\nASSISTANT: Got it! I'll make sure to CC maya.patel@outlook.com on all drafted emails.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "contact",
+          "key": "user_email",
+          "value": "maya.patel@outlook.com",
+          "min_confidence": 0.95
+        },
+        {
+          "type": "instruction",
+          "category": "communication",
+          "key": "email_cc_instruction",
+          "value": "always CC user when drafting emails",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Two distinct memories: the email address (a fact) and the standing instruction (always CC). Both are explicit and high confidence."
+    },
+    {
+      "id": "explicit_night_shift",
+      "category": "user_fact_extraction",
+      "description": "User states a work constraint",
+      "conversation": "USER: Never schedule anything before 11 AM. I work night shifts and I sleep until then.\n\nASSISTANT: Understood! I'll keep all scheduling after 11 AM to respect your sleep schedule.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "constraint",
+          "category": "schedule",
+          "key": "availability_start",
+          "value": "not before 11 AM, works night shifts",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "Strong explicit constraint with reasoning (night shifts). High confidence instruction."
+    },
+    {
+      "id": "mixed_personal_and_curiosity",
+      "category": "mixed_conversation",
+      "description": "User shares personal hobby then asks unrelated world-fact",
+      "conversation": "USER: I've been painting watercolors for about 10 years now. By the way, why is the sky blue?\n\nASSISTANT: That's a wonderful hobby! The sky appears blue because of Rayleigh scattering - shorter blue wavelengths of sunlight scatter more than longer wavelengths when passing through Earth's atmosphere.",
+      "existing_memories": [
+        {
+          "id": "mem_hobby001",
+          "type": "fact",
+          "category": "personal",
+          "key": "user_name",
+          "value": "Ravi",
+          "confidence": 0.95,
+          "source_turn": 1
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "preference",
+          "category": "hobbies",
+          "key": "hobby_painting",
+          "value": "watercolor painting for about 10 years",
+          "min_confidence": 0.9
+        }
+      ],
+      "expected_rejections": ["sky_blue", "rayleigh_scattering", "science", "topic_discussed"],
+      "notes": "The painting hobby is a personal fact with duration. The sky question is pure world knowledge. Existing name memory should be kept."
+    },
+    {
+      "id": "mixed_tech_stack_in_help",
+      "category": "mixed_conversation",
+      "description": "User reveals tech stack while asking for help",
+      "conversation": "USER: I'm building a REST API with FastAPI and PostgreSQL. Getting a 422 Unprocessable Entity error on my POST endpoint.\n\nASSISTANT: A 422 error in FastAPI usually means the request body doesn't match your Pydantic model. Check that all required fields are present and their types match the schema definition.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "tools",
+          "key": "tech_stack",
+          "value": "FastAPI and PostgreSQL",
+          "min_confidence": 0.7
+        }
+      ],
+      "expected_rejections": ["422_error", "topic_discussed", "api_error"],
+      "notes": "The tech stack mention is a user fact (what they work with). The error debugging is transient. Lower confidence since it could be a one-time project."
+    },
+    {
+      "id": "world_fact_animal",
+      "category": "world_fact_rejection",
+      "description": "User asks about an animal",
+      "conversation": "USER: How many hearts does an octopus have?\n\nASSISTANT: An octopus has three hearts! Two branchial hearts pump blood to the gills, and one systemic heart pumps oxygenated blood to the rest of the body.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["octopus", "animal", "biology", "fun_fact"],
+      "notes": "Animal trivia question. Pure world knowledge, nothing about the user."
+    },
+    {
+      "id": "edge_cultural_preference",
+      "category": "user_fact_extraction",
+      "description": "User states a cultural or religious practice",
+      "conversation": "USER: I observe Ramadan, so I'll be fasting during daylight hours next month. Can you adjust meal suggestions accordingly?\n\nASSISTANT: Of course! During Ramadan, I'll suggest suhoor (pre-dawn meal) and iftar (post-sunset meal) options that are nutritious and sustaining.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "personal",
+          "key": "religious_observance",
+          "value": "observes Ramadan, fasts during daylight hours",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": ["meal_suggestion"],
+      "notes": "Religious observance is a significant personal fact that affects practical recommendations. High confidence explicit statement."
+    },
+    {
+      "id": "edge_third_person_mention",
+      "category": "edge_case",
+      "description": "User talks about a colleague's setup, not their own",
+      "conversation": "USER: My colleague just switched to Arch Linux and won't stop talking about it. Is it really that much better?\n\nASSISTANT: Arch Linux offers a high degree of customization and uses a rolling release model. It's great for users who want full control, but it has a steeper learning curve than Ubuntu or Fedora.",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["arch_linux", "operating_system", "colleague_preference", "interest_in"],
+      "notes": "The Arch Linux usage belongs to the colleague, NOT the user. The user asking about it does not imply they use or prefer it. No user fact to store."
+    },
+    {
+      "id": "meta_noise_laugh",
+      "category": "meta_noise_rejection",
+      "description": "User responds with just laughter and acknowledgment",
+      "conversation": "USER: Haha that's hilarious! Yeah, makes sense.\n\nASSISTANT: Glad you found it amusing! Anything else you'd like to know?",
+      "existing_memories": [],
+      "expected_memories": [],
+      "expected_rejections": ["humor", "filler", "acknowledgment"],
+      "notes": "Pure conversational filler. Laughter and agreement contain no user facts."
+    },
+    {
+      "id": "explicit_pet",
+      "category": "user_fact_extraction",
+      "description": "User mentions their pet by name and type",
+      "conversation": "USER: My cat Mochi keeps jumping on my keyboard while I'm working. Any tips to keep her off?\n\nASSISTANT: Classic cat behavior! Try placing a decoy keyboard or a warm laptop-sized box nearby. Cats love sitting on warm surfaces, so a heated pad next to your desk might redirect her.",
+      "existing_memories": [],
+      "expected_memories": [
+        {
+          "type": "entity",
+          "category": "pets",
+          "key": "cat_name",
+          "value": "Mochi",
+          "min_confidence": 0.95
+        }
+      ],
+      "expected_rejections": ["cat_tip", "topic_discussed"],
+      "notes": "Pet name and type are user-specific entities. The tips are assistant output."
+    },
+    {
+      "id": "correction_add_new_alongside_existing",
+      "category": "correction_update",
+      "description": "User adds new info without contradicting existing memories",
+      "conversation": "USER: Oh and I also speak Hindi, by the way.\n\nASSISTANT: Good to know! I'll keep that in mind.",
+      "existing_memories": [
+        {
+          "id": "mem_lang0001",
+          "type": "preference",
+          "category": "language",
+          "key": "preferred_language",
+          "value": "English for technical discussions, Tamil at home",
+          "confidence": 0.9,
+          "source_turn": 3
+        }
+      ],
+      "expected_memories": [
+        {
+          "type": "fact",
+          "category": "language",
+          "key": "additional_language",
+          "value": "Hindi",
+          "action": "add",
+          "min_confidence": 0.85
+        }
+      ],
+      "expected_rejections": [],
+      "notes": "User adds a new language to their profile without contradicting existing language preference. Should be added as a new memory, not replace the existing one."
+    }
+  ]
+}
